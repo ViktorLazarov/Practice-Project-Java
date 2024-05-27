@@ -17,7 +17,6 @@ public class Main {
 		System.out.println("3.Exit");
 		printing('*', 30);
 		
-		
 		while(!exit) {
 			userChoice = takeInput(scanner);
 			
