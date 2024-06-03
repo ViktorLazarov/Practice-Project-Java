@@ -10,12 +10,14 @@ public class Main {
 		ArrayList<ArrayList<String>> users = new ArrayList<ArrayList<String>>();
 		boolean exit = false;
 		
+//		User user1 = new User("viktor1", "lazarov1", 100);
+//		
+//		System.out.println(user1.getName());
+//		
+//		user1.setName("viktor");
+//		
+//		System.out.println(user1.getName());
 		
-		printing('*', 30);
-		System.out.println("1.Log In");
-		System.out.println("2.Create User");
-		System.out.println("3.Exit");
-		printing('*', 30);
 		
 		while(!exit) {
 			userChoice = takeInput(scanner);
@@ -25,7 +27,7 @@ public class Main {
 				System.out.println("Please enter a valid option");
 				userChoice = takeInput(scanner);
 			}
-
+			
 			switch (userChoice) {
 			case "1":
 				// log in function
@@ -63,6 +65,9 @@ public class Main {
 	}
 	
 	private static String takeInput(Scanner scanner) {
+		System.out.println("1.Log In");
+		System.out.println("2.Create User");
+		System.out.println("3.Exit");
 		System.out.print("Please choose an option (1, 2, or 3): ");
 		
 		return scanner.nextLine();
