@@ -15,42 +15,30 @@ public class Main {
 			userChoice = takeInput(scanner);
 			
 			switch (userChoice) {
-			case "1":
-				// log in function
-				String loginStatus = login(users, scanner);
-				printing('*', 30); // print a line with 30 "*"
-
-				if(loginStatus.equals("logged in")) { 			// checks if the user entered an existing username and then it checks if the provided password is correct for the provided username
-					System.out.println("Logged in!"); // entered password is correct
-				} else if(loginStatus.equals("canceled")){
-					System.out.println("Operation was canceled"); // operation was canceled by the user
-				} else {
-					System.out.println("No user found, please register first."); // there's no user with the provided username
-				}
-				printing('*', 30);
-				break;
-			case "2":
-				// create user function
-				printing('*', 30);
-				System.out.println("Create User");
-				printing('*', 30);
-				createUser(users, scanner); //create a user and insert it into the 'users' arrayList
-				printing('*', 30);
-				break;
-			case "3":
-				//exit the program
-				exit = true;
-				break;
-			default:
-				//the user entered something different than the awaited input ("1", "2" or "3")
-				System.out.println("Please enter a valid option");
-				break;
+				case "1" -> { // log in function
+                            String loginStatus = login(users, scanner);// checks if the user entered an existing username and then it checks if the provided password is correct for the provided username
+                            printing('*', 30); // print a line with 30 "*"
+                            switch (loginStatus) {
+                                case "logged in" -> System.out.println("Logged in!"); // the user logged in succesfully
+                                case "canceled" -> System.out.println("Operation was canceled"); // operation was canceled by the user
+                                default -> System.out.println("No user found, please register first."); // there's no user with the provided username
+                            }
+                            printing('*', 30);
+                        }
+				case "2" -> {// create user function
+                            printing('*', 30);
+                            System.out.println("Create User");
+                            printing('*', 30);
+                            createUser(users, scanner); //create a user and insert it into the 'users' arrayList
+                            printing('*', 30);
+                        }
+				case "3" -> exit = true; //exit the program
+				default -> System.out.println("Please enter a valid option"); //the user entered something different than the awaited input ("1", "2" or "3")
 			}
 		}
 		printing('*', 30);
 		System.out.println("Have a nice day");
 		scanner.close();
-		
 	}
 	
 	
@@ -91,14 +79,12 @@ public class Main {
 		users.add(newUser); // adds the created user object to the users list
 		
 		System.out.printf("User \"%s\" created!\n", newUser.getName()); // tells the user that a user with the provided username was created
-		
 	}
 	
 	private static String login(List<User> users, Scanner scanner) {
 		System.out.print("Please enter your username: ");
 		String username = scanner.nextLine();
 		String responce = "";
-		
 		
 		for(User user : users) {  // go over all the objects in the list
 			if(user.getName().equals(username)) { // checks if the name of the currect object equals the username provided by the user
