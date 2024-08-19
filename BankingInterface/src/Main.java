@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -19,12 +20,12 @@ public class Main {
 				String loginStatus = login(users, scanner);
 				printing('*', 30); // print a line with 30 "*"
 
-				if(loginStatus.equals("logged in")) { 			// checks if the user entered an existing username and then it checks if the 
+				if(loginStatus.equals("logged in")) { 			// checks if the user entered an existing username and then it checks if the provided password is correct for the provided username
 					System.out.println("Logged in!"); // entered password is correct
 				} else if(loginStatus.equals("canceled")){
-					System.out.println("Operation was canceled");
+					System.out.println("Operation was canceled"); // operation was canceled by the user
 				} else {
-					System.out.println("No user found, please register first.");
+					System.out.println("No user found, please register first."); // there's no user with the provided username
 				}
 				printing('*', 30);
 				break;
@@ -54,6 +55,7 @@ public class Main {
 	
 	
 	private static void printing(char symbol, int count) {
+		// prints a line with the selected amount and type of symbol
 		for (int i = 0; i < count; i++) {
 			System.out.print(symbol);
 		}
@@ -61,6 +63,7 @@ public class Main {
 	}
 	
 	private static String takeInput(Scanner scanner) {
+		// prints out the available options for the user to choose from
 		System.out.println("1.Log In");
 		System.out.println("2.Create User");
 		System.out.println("3.Exit");
@@ -69,52 +72,54 @@ public class Main {
 		return scanner.nextLine();
 	}
 	
-	private static void createUser(ArrayList<User> users, Scanner scanner) {	
-		User newUser = new User();
+	private static void createUser(List<User> users, Scanner scanner) {	
+		User newUser = new User(); // create a new user object
 		
 		System.out.print("Enter a new username: ");
-		String username = scanner.nextLine();
-		while (userExists(users, username)) {
+		String username = scanner.nextLine(); // read the username form the console
+		while (userExists(users, username)) { // check if the selected username if not taken
 			System.out.println("The user already exists. Please choose a different username.");
 			System.out.print("Enter a new username: ");
 			username = scanner.nextLine();
 		}
-		newUser.setName(username);
+		newUser.setName(username); // sets the name of the currect user object to the provided username
 		
 		System.out.print("Enter a password: ");
-		String password = scanner.nextLine();
-		newUser.setPassword(password);
+		String password = scanner.nextLine(); // reads a password from the console
+		newUser.setPassword(password); // sets the password of the currect user object to the provided password
 		
-		users.add(newUser);
+		users.add(newUser); // adds the created user object to the users list
 		
-		System.out.printf("User \"%s\" created!\n", newUser.getName());
+		System.out.printf("User \"%s\" created!\n", newUser.getName()); // tells the user that a user with the provided username was created
 		
 	}
 	
-	private static String login(ArrayList<User> users, Scanner scanner) {
+	private static String login(List<User> users, Scanner scanner) {
 		System.out.print("Please enter your username: ");
 		String username = scanner.nextLine();
 		String responce = "";
 		
 		
-		for(User user : users) {
-			if(user.getName().equals(username)) {
+		for(User user : users) {  // go over all the objects in the list
+			if(user.getName().equals(username)) { // checks if the name of the currect object equals the username provided by the user
 				System.out.print("Please enter your password: ");
 				while (true) {
 					String password = scanner.nextLine();
-					if(user.getPassword().equals(password)) {
+					if(user.getPassword().equals(password)) { // checks if the object's password match the password provided by the user
 						responce = "logged in";
 						return responce;
-					} else if(password.equals("cancel%%")){
+					} else if(password.equals("cancel%%")){ // the user chose to cancel the operation
 						responce = "canceled";
 						return responce;
 					} 
 					else {
+						// offers an option to cancel the operation when the user enters 'cancel%%' instead of a password
 						System.out.println("Wrong password,please try again.(type 'cancel%%' to cancel the operation)");
 						System.out.print("Please enter your password: ");
 					}
 				}
 			} else {
+				// there's no user with the provided username
 				responce = "does not exist";
 			}
 		}
@@ -122,9 +127,9 @@ public class Main {
 		return responce;
 	}
 
-	public static boolean userExists(ArrayList<User> users, String username) {
+	public static boolean userExists(List<User> users, String username) {
         for (User user : users) {
-            if (user.getName().equals(username)) {
+            if (user.getName().equals(username)) { // checks if an object already exists with this username
                 return true;
             }
         }
