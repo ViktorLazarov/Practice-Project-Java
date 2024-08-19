@@ -34,6 +34,8 @@ public class Main {
 				printing('*', 30);
 				if(login(users, scanner)) {
 					System.out.println("Logged in!");
+				} else {
+					System.out.println("No user found, please register first.");
 				}
 				printing('*', 30);
 				break;
@@ -52,7 +54,7 @@ public class Main {
 		}
 		printing('*', 30);
 		System.out.println("Have a nice day");
-		
+		scanner.close();
 		
 	}
 	
