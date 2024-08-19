@@ -70,9 +70,15 @@ public class Main {
 	}
 	
 	private static void createUser(ArrayList<User> users, Scanner scanner) {	
+		User newUser = new User();
+		
 		System.out.print("Enter a new username: ");
 		String username = scanner.nextLine();
-		User newUser = new User();
+		while (userExists(users, username)) {
+			System.out.println("The user already exists. Please choose a different username.");
+			System.out.print("Enter a new username: ");
+			username = scanner.nextLine();
+		}
 		newUser.setName(username);
 		
 		System.out.print("Enter a password: ");
@@ -115,4 +121,13 @@ public class Main {
 
 		return responce;
 	}
+
+	public static boolean userExists(ArrayList<User> users, String username) {
+        for (User user : users) {
+            if (user.getName().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
