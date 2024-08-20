@@ -12,7 +12,8 @@ public class Main {
 		boolean exit = false;		
 		
 		while(!exit) {
-			userChoice = takeInput(scanner);
+			printMenu();
+			userChoice = scanner.nextLine();
 			
 			switch (userChoice) {
 				case "1" -> { // log in function
@@ -50,14 +51,12 @@ public class Main {
 		System.out.println();
 	}
 	
-	private static String takeInput(Scanner scanner) {
+	private static void printMenu() {
 		// prints out the available options for the user to choose from
 		System.out.println("1.Log In");
 		System.out.println("2.Create User");
 		System.out.println("3.Exit");
 		System.out.print("Please choose an option (1, 2, or 3): ");
-		
-		return scanner.nextLine();
 	}
 	
 	private static void createUser(List<User> users, Scanner scanner) {	
