@@ -17,10 +17,10 @@ public class Main {
 			
 			switch (userChoice) {
 				case "1" -> { // log in function
-                            String loginStatus = login(users, scanner);// checks if the user entered an existing username and then it checks if the provided password is correct for the provided username
+                            String loginStatus = login(users, scanner);// checks if the user entered an existing username, and then it checks if the provided password is correct for the provided username
                             printing('*', 30); // print a line with 30 "*"
                             switch (loginStatus) {
-                                case "logged in" -> System.out.println("Logged in!"); // the user logged in succesfully
+                                case "logged in" -> System.out.println("Logged in!"); // the user logged in successfully
                                 case "canceled" -> System.out.println("Operation was canceled"); // operation was canceled by the user
                                 default -> System.out.println("No user found, please register first."); // there's no user with the provided username
                             }
@@ -34,7 +34,7 @@ public class Main {
                             printing('*', 30);
                         }
 				case "3" -> exit = true; //exit the program
-				default -> System.out.println("Please enter a valid option"); //the user entered something different than the awaited input ("1", "2" or "3")
+				default -> System.out.println("Please enter a valid option"); //the user entered something different from the awaited input ("1", "2" or "3")
 			}
 		}
 		printing('*', 30);
@@ -69,11 +69,11 @@ public class Main {
 			System.out.print("Enter a new username: ");
 			username = scanner.nextLine();
 		}
-		newUser.setName(username); // sets the name of the currect user object to the provided username
+		newUser.setName(username); // sets the name of the current user object to the provided username
 		
 		System.out.print("Enter a password: ");
 		String password = scanner.nextLine(); // reads a password from the console
-		newUser.setPassword(password); // sets the password of the currect user object to the provided password
+		newUser.setPassword(password); // sets the password of the current user object to the provided password
 		
 		users.add(newUser); // adds the created user object to the users list
 		
@@ -83,19 +83,19 @@ public class Main {
 	private static String login(List<User> users, Scanner scanner) {
 		System.out.print("Please enter your username: ");
 		String username = scanner.nextLine();
-		String responce = "";
+		String response = "";
 		
 		for(User user : users) {  // go over all the objects in the list
-			if(user.getName().equals(username)) { // checks if the name of the currect object equals the username provided by the user
+			if(user.getName().equals(username)) { // checks if the name of the current object equals the username provided by the user
 				System.out.print("Please enter your password: ");
 				while (true) {
 					String password = scanner.nextLine();
 					if(user.getPassword().equals(password)) { // checks if the object's password match the password provided by the user
-						responce = "logged in";
-						return responce;
+						response = "logged in";
+						return response;
 					} else if(password.equals("cancel%%")){ // the user chose to cancel the operation
-						responce = "canceled";
-						return responce;
+						response = "canceled";
+						return response;
 					} 
 					else {
 						// offers an option to cancel the operation when the user enters 'cancel%%' instead of a password
@@ -105,11 +105,11 @@ public class Main {
 				}
 			} else {
 				// there's no user with the provided username
-				responce = "does not exist";
+				response = "does not exist";
 			}
 		}
 
-		return responce;
+		return response;
 	}
 
 	public static boolean userExists(List<User> users, String username) {
